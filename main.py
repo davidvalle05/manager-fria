@@ -30,3 +30,20 @@ def create_single_task_get(title: str, category: str = "trabajo"):
         return {"status": "success", "message": f"Tarea '{title}' añadida a la agenda en la nube."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/tasks/today")
+def get_today_tasks():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM tasks WHERE status = 'pendiente' ORDER BY scheduled_for ASC")
+        tasks = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return {
+            "total_pending": len(tasks),
+            "tasks": tasks,
+            "response_persona": f"Tienes {len(tasks)} bloques pendientes en la nube."
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
