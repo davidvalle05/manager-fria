@@ -24,7 +24,7 @@ def morning_brief():
   )
   exams = cur.fetchall()
 
-  # 3. Rutinas fijas y hábitos
+  # 3. Rutinas fijas
   cur.execute("SELECT title, duration_minutes FROM routines;")
   routines = cur.fetchall()
 

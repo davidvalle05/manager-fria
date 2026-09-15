@@ -4,6 +4,7 @@ from fastapi import APIRouter, HTTPException
 router = APIRouter(prefix="/api/tasks", tags=["Tasks"])
 
 
+@router.get("")
 @router.get("/")
 def get_tasks():
   conn = get_db_connection()

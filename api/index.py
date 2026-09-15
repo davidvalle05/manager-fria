@@ -3,7 +3,7 @@ from routers import smart_planner, tasks
 
 app = FastAPI(title="Manager Fria AI API", version="2.0")
 
-# Registrar los routers de la API
+# Incluir los routers con sus prefijos correspondientes
 app.include_router(tasks.router)
 app.include_router(smart_planner.router)
 
